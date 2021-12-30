@@ -16,7 +16,7 @@ md"""
 
 startTime = now()
 
-villages = GDF.read("村里界圖20140313.json")
+villages = GDF.read("./村里界圖20140313.json")
 villages_taichung = villages[villages.COUNTYNAME .== "臺中市", :]
 villages_wufeng = villages_taichung[villages_taichung.TOWNNAME .== "霧峰區", :]
 
@@ -24,7 +24,7 @@ md"""
 # Open DEM for that area
 """
 
-dem_path = "/DEM/n24_e120_1arc_v3.tif"
+dem_path = "./DEM/n24_e120_1arc_v3.tif"
 dem_model = Raster(dem_path)
 masked_dem = trim(mask(dem_model; to=villages_wufeng.geom[1]))
 mean_hight_wufeng = map(x -> mean(skipmissing(replace_missing(mask(dem_model; to=x)))), villages_wufeng.geom)
@@ -36,7 +36,7 @@ md"""
 
 startTime = now()
 
-villages = GDF.read("村里界圖20140313.json")
+villages = GDF.read("./村里界圖20140313.json")
 villages_taichung = villages[villages.COUNTYNAME .== "臺中市", :]
 villages_wufeng = villages_taichung[villages_taichung.TOWNNAME .== "霧峰區", :]
 
@@ -44,7 +44,7 @@ md"""
 # Open DEM for that area
 """
 
-dem_path = "/DEM/n24_e120_1arc_v3.tif"
+dem_path = "./DEM/n24_e120_1arc_v3.tif"
 dem_model = Raster(dem_path)
 masked_dem = trim(mask(dem_model; to=villages_wufeng.geom[1]))
 mean_height_wufeng = map(x -> mean(skipmissing(replace_missing(mask(dem_model; to=x)))), villages_wufeng.geom)

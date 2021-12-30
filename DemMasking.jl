@@ -22,7 +22,7 @@ md"""
 startTime = now()
 
 # ╔═╡ ce0cf89e-67c4-11ec-2610-19c12302f980
-villages = GDF.read("/home/sebastian/Dokumente/Programmierung/Julia/Taiwan_GIS/村里界圖20140313.json")
+villages = GDF.read("./村里界圖20140313.json")
 
 # ╔═╡ e37b37dc-67c3-11ec-2188-c5374a278014
 villages_taichung = villages[villages.COUNTYNAME .== "臺中市", :]
@@ -42,9 +42,6 @@ dem_modell = Raster(dem_path)
 # ╔═╡ 4450cc78-67e4-11ec-1354-7be7e9300f50
 masked_dem = trim(mask(dem_modell; to=villages_wufeng.geom[1]))
 
-# ╔═╡ 30771ef0-67df-11ec-0cb0-cd1c74499b2e
-v2 = mean(skipmissing(replace_missing(masked_dem)))
-
 # ╔═╡ 7acc64dc-67e0-11ec-3219-73cee8bd8999
 mean_hight_wufeng = map(x -> mean(skipmissing(replace_missing(mask(dem_modell; to=x)))), 
 	villages_wufeng.geom)
@@ -62,6 +59,5 @@ mean_hight_wufeng = map(x -> mean(skipmissing(replace_missing(mask(dem_modell; t
 # ╠═8a2ce8fa-6972-11ec-081f-174ec3151939
 # ╠═02e73622-67db-11ec-0227-5711068a2c47
 # ╠═4450cc78-67e4-11ec-1354-7be7e9300f50
-# ╠═30771ef0-67df-11ec-0cb0-cd1c74499b2e
 # ╠═7acc64dc-67e0-11ec-3219-73cee8bd8999
 # ╠═7c788ff6-67e3-11ec-36bb-ed4cc01a3a3a
