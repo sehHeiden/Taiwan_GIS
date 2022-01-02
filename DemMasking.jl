@@ -38,7 +38,7 @@ dem_models = map(x->read(Raster(x)), filter(x->occursin("n24", x),
 			     join=true)))
 
 # ╔═╡ c2453b64-6bc9-11ec-104c-3dd1a4377a62
-dem_mosaic = mosaic(first, map(Raster, dem_models))
+dem_mosaic = mosaic(first, dem_models)
 
 # ╔═╡ 7acc64dc-67e0-11ec-3219-73cee8bd8999
 mean_hight_wufeng = map(x -> mean(skipmissing(replace_missing(mask(dem_model; to=x)))), 

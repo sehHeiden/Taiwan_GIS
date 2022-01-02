@@ -29,11 +29,9 @@ md"""
 dem_path = "./DEM/n24_e120_1arc_v3.tif"
 dem_model = read(Raster(dem_path))
 # @btime read(Raster(dem_path))
-dem_path = "./DEM/n24_e120_1arc_v3.tif"
-dem_model = read(Raster(dem_path))
-dem_models = map(x->read(Raster(x)), filter(x->occursin("n24", x), readdir("./DEM"; join=true)))
 
-dem_mosaic = mosaic(first, map(Raster, dem_models))
+dem_models = map(x->read(Raster(x)), filter(x->occursin("n24", x), readdir("./DEM"; join=true)))
+dem_mosaic = mosaic(first, dem_models)
 
  mean_height_wufeng = tmap(x -> mean(skipmissing(replace_missing(mask(dem_model; to=x)))), villages_wufeng.geom)
  @btime tmap(x -> mean(skipmissing(replace_missing(mask(dem_model; to=x)))), villages_wufeng.geom)
